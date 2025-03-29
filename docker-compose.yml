@@ -32,7 +32,9 @@ services:
           memory: 256M
 
   service1:
-    build: ./service-1-java
+    build:
+      context: .
+      dockerfile: service-1-java/Dockerfile
     container_name: service1
     depends_on:
       rabbitmq:
@@ -60,7 +62,9 @@ services:
     restart: on-failure
 
   service2:
-    build: ./service-2-kotlin
+    build:
+      context: .
+      dockerfile: service-2-kotlin/Dockerfile
     container_name: service2
     depends_on:
       rabbitmq:
