@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component
 class MessageSender(private val rabbitTemplate: AmqpTemplate) {
 
     fun sendPing() {
-        val message = "Ping from service2"
-        println("Sending to Service 1: $message")
+        val message = "Ping from s2"
+        println("Sending to s1: $message")
         rabbitTemplate.convertAndSend("ping-pong-exchange", "service1.ping.key", message)
     }
 
     fun sendPong() {
-        val message = "Pong from service2"
-        println("Sending to Service 1: $message")
+        val message = "Pong from s2"
+        println("Sending to s1: $message")
         rabbitTemplate.convertAndSend("ping-pong-exchange", "service1.pong.key", message)
     }
 } 

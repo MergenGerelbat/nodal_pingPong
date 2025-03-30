@@ -6,8 +6,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageListener {
 
-    @RabbitListener(queues = "pong-queue")
-    public void receiveMessage(String message) {
-        System.out.println("Service 1 received: " + message);
+    @RabbitListener(queues = "service1-pong-queue")
+    public void receiveService2Pong(String message) {
+        System.out.println("s1 received: " + message);
+    }
+
+    @RabbitListener(queues = "service1-ping-queue")
+    public void receiveService2Ping(String message) {
+        System.out.println("s1 received: " + message);
+        messageSender.sendPong();
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        messageSender.sendPing();
     }
 }

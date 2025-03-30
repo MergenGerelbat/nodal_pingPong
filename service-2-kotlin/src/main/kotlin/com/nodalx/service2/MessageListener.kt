@@ -8,15 +8,15 @@ class MessageListener(private val messageSender: MessageSender) {
 
     @RabbitListener(queues = ["service2-pong-queue"])
     fun receiveService1Pong(message: String) {
-        println("Service 2 received: $message")
+        println("s2 received: $message")
     }
 
     @RabbitListener(queues = ["service2-ping-queue"])
     fun receiveService1Ping(message: String) {
-        println("Service 2 received: $message")
+        println("s2 received: $message")
         messageSender.sendPong()
 
-        Thread.sleep(10000) // wait 10 seconds
+        Thread.sleep(10000) 
         messageSender.sendPing()
     }
 }
