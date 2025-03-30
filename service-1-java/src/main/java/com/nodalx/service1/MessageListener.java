@@ -1,10 +1,14 @@
 package com.nodalx.service1;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MessageListener {
+
+    @Autowired
+    private MessageSender messageSender;
 
     @RabbitListener(queues = "service1-pong-queue")
     public void receiveService2Pong(String message) {
